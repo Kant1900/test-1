@@ -1,0 +1,44 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import sys
+import math
+
+
+
+lambed = float(input("波长:"))
+lambed = lambed*1e-9
+#d = float(input("距离："))
+#l = float(input("距离："))
+#I = float(input("光强："))
+#d = d*1e-9
+#l = l*1e-3
+#f = 0.2
+#a=input('楔角：')
+
+d1 = 0.2
+d2 = 0.2 + 0.0001
+d3 = 0.2 + 0.0002
+d4 = 0.2 + 0.0003
+
+d1 = d1 * 1e-3
+d2 = d2 * 1e-3
+d3 = d3 * 1e-3
+d4 = d4 * 1e-3
+
+I0 = 4
+f = 100
+
+r = []
+x = np.linspace(-10,10,1500)
+y = np.linspace(-10,10,1500)
+b = np.zeros((1500, 1500))
+for i in range(1500):
+        for j in range(1500):
+              r = math.sqrt(x[i] ** 2 + y[j] ** 2)
+              # b[i,j] = math.cos(math.pi * (2 * d1 * math.cos(math.asin(math.sin(math.atan(r / f))))) / lambed) ** 2
+              b[i,j] = math.cos(2*math.pi*d1*math.cos(math.atan(r/f))/lambed)**2
+
+print (b)
+plt.imshow(b)
+plt.show()
